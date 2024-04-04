@@ -135,3 +135,100 @@ Zadanie 3
 </html>
 
 
+
+//////////////////////////////////
+MySql
+
+
+CREATE TABLE Account
+(
+    AccountID INT PRIMARY KEY AUTO_INCREMENT,
+    Email     TEXT NOT NULL,
+    Password  TEXT NOT NULL,
+    Username  VARCHAR(10)
+);
+
+CREATE TABLE Personal_Data
+(
+    CustomerID   INT PRIMARY KEY AUTO_INCREMENT,
+    First_Name   TEXT NOT NULL,
+    Last_Name    TEXT,
+    Phone_Number INT NOT NULL,
+    AccountID    INT UNIQUE,
+    AdressID     INT
+
+);
+
+CREATE TABLE Adress
+(
+    AdressID     INT PRIMARY KEY AUTO_INCREMENT,
+    Country      TEXT NOT NULL,
+    Street       TEXT NOT NULL,
+    House_Number INT NOT NULL,
+    Flat_Number  INT,
+    Post_Code    VARCHAR(10) NOT NULL,
+    OrderID      INT,
+    CustomerID   INT
+);
+
+CREATE TABLE Orders
+(
+    OrderID            INT PRIMARY KEY AUTO_INCREMENT,
+    Date_of_purchase   DATETIME NOT NULL,
+    Status_of_delivery TEXT NOT NULL,
+    Date_of_Delivery   DATETIME NOT NULL,
+    CustomerID         INT NOT NULL,
+    AdressID           INT NOT NULL,
+    Product_ID         INT NOT NULL
+);
+CREATE TABLE Product
+(
+    ProductID   INT PRIMARY KEY AUTO_INCREMENT,
+    Price       DECIMAL(8, 6),
+    Name        TEXT,
+    Description TEXT,
+    OrderID     INT
+);
+
+
+ALTER TABLE Personal_Data
+ADD FOREIGN KEY (AccountID) REFERENCES Account(AccountID);
+
+ALTER TABLE Personal_Data
+ADD FOREIGN KEY (AdressID) REFERENCES Adress(AdressID);
+
+ALTER TABLE Adress
+ADD FOREIGN KEY (OrderID) REFERENCES Orders(OrderID);
+
+ALTER TABLE Adress
+ADD FOREIGN KEY (CustomerID) REFERENCES Personal_Data(CustomerID);
+
+ALTER TABLE Orders
+ADD FOREIGN KEY (CustomerID) REFERENCES Personal_Data(CustomerID);
+
+ALTER TABLE Orders
+ADD FOREIGN KEY (AdressID) REFERENCES Adress(AdressID);
+
+ALTER TABLE Orders
+ADD FOREIGN KEY (Product_ID) REFERENCES Product(ProductID);
+
+INSERT INTO Account VALUES (1, 'klientpierwszy@gmail.com', '20409Kje', 's30022');
+INSERT INTO Account VALUES (2, 'klientdrugi@gmail.com','ins9381j', 's29834' );
+INSERT INTO Account VALUES (3, 'klienttreci@gmail.com','kfgjh383j', 's40743' );
+
+INSERT INTO Personal_Data (First_Name, Last_Name, Phone_Number, AdressID, AccountID ) VALUES ('Kyrylo', 'Krainiuk', '483024932', 1, 1);
+INSERT INTO Personal_Data (First_Name, Last_Name, Phone_Number, AdressID, AccountID ) VALUES ('Denys', 'Novikov', '74637295', 2, 2);
+INSERT INTO Personal_Data (First_Name, Last_Name, Phone_Number, AdressID, AccountID ) VALUES ('Mark', 'Tsichanau', '00000000', 3, 3);
+ALTER TABLE Adress
+ADD column City TEXT;
+
+INSERT INTO Adress (Country,City, Street, House_Number, Flat_Number, Post_Code) VALUES ('Poland','Gdansk', 'Targ', '3', '5', '95-387');
+INSERT INTO Adress (Country,City,  Street, House_Number, Flat_Number, Post_Code) VALUES ('Ukraine','Kyiv', 'Targ', '3', '5', '95-387');
+INSERT INTO Adress (Country,City,  Street, House_Number, Flat_Number, Post_Code) VALUES ('Germany','Berlin', 'Los', '9', '8', '72-342');
+
+INSERT INTO Orders (Date_of_purchase,Status_of_delivery,Date_of_Delivery,CustomerID,AdressID,Product_ID) VALUES ('2023-10-28 19:30:35', 'Dostarczone', '2024-12-05 16:30:21', 3,1,1);
+INSERT INTO Orders (Date_of_purchase,Status_of_delivery,Date_of_Delivery,CustomerID,AdressID,Product_ID) VALUES ('2022-01-30 17:30:10', 'W trakcie', '2023-10-29 09:10:51', 4,2,2);
+INSERT INTO Orders (Date_of_purchase,Status_of_delivery,Date_of_Delivery,CustomerID,AdressID,Product_ID) VALUES ('2019-05-04 12:30:20', 'Dostarczone', '2022-11-08 19:60:31', 5,2,2);
+
+INSERT INTO Product (Price, Name, Description) VALUES 
+
