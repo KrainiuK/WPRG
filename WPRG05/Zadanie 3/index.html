@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .row {
+            display: flex;
+            justify-content: space-around;
+        }
+        .equal-width{
+            width: 100%;
+            margin: 10px;
+            line-height: 80px;
+            background-color: lightblue;
+            text-align: center;
+
+        }
+        .row2{
+            display: flex;
+
+        }
+        .fixed-percentage{
+            width: 40%;
+            margin: 10px;
+            line-height: 80px;
+            background-color: lightblue;
+            text-align: center;
+        }
+        .flexible{
+            margin: 10px;
+            line-height: 80px;
+            background-color: lightblue;
+            text-align: center;
+            flex: auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div class = "row">
+        <div class = "equal-width">Element 1</div>
+        <div class = "equal-width">Element 2</div>
+        <div class = "equal-width">Element 3</div>
+    </div>
+    <div class="row2">
+        <div class="fixed-percentage">Element 1</div>
+        <div class="flexible">Element 2</div>
+    </div>
+
+</body>
+</html>
